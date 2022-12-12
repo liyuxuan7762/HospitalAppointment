@@ -18,7 +18,7 @@ import java.util.Map;
  *
  * @author qy
  */
-@Data
+    @Data
 @ApiModel(description = "数据字典")
 @TableName("dict")
 public class Dict {

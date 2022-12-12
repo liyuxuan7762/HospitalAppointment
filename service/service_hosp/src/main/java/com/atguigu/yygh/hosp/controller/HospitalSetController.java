@@ -79,6 +79,7 @@ public class HospitalSetController {
 
     @ApiOperation("根据ID查询医院信息")
     @GetMapping("getHospSet/{id}")
+    @CrossOrigin
     public Result getHospSet(@PathVariable(name = "id") Long id) {
         HospitalSet hospitalSet = this.hospitalSetService.getById(id);
         return Result.ok(hospitalSet);
@@ -86,6 +87,7 @@ public class HospitalSetController {
 
     @ApiOperation("根据ID修改医院信息")
     @PostMapping("/updateHospSet")
+    @CrossOrigin
     public Result updateHospSet(@RequestBody HospitalSet hospitalSet) {
         boolean result = this.hospitalSetService.updateById(hospitalSet);
         return result ? Result.ok() : Result.fail();

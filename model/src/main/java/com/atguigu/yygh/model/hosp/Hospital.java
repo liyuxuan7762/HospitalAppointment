@@ -24,7 +24,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Hospital extends BaseMongoEntity {
 	
 	private static final long serialVersionUID = 1L;
-	
+
+	public Hospital() {
+	}
+
 	@ApiModelProperty(value = "医院编号")
 	@Indexed(unique = true) //唯一索引
 	private String hoscode;
@@ -68,5 +71,8 @@ public class Hospital extends BaseMongoEntity {
 		this.bookingRule = JSONObject.parseObject(bookingRule, BookingRule.class);
 	}
 
+	public Hospital(String hoscode) {
+		this.hoscode = hoscode;
+	}
 }
 

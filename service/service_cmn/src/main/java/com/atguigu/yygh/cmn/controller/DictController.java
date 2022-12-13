@@ -24,7 +24,6 @@ public class DictController {
 
     @ApiOperation("根据ID查询Dict的所有子数据")
     @GetMapping("/findChildData/{id}")
-    // @Cacheable(value = "dict", keyGenerator = "keyGenerator")
     public Result findChildData(@PathVariable(name = "id") Long id) {
         List<Dict> dictList = this.dictService.findChildData(id);
         return  Result.ok(dictList);
@@ -38,7 +37,6 @@ public class DictController {
 
     @ApiOperation("从Excel中导入文件")
     @PostMapping("/importData")
-    @CacheEvict(value = "dict", allEntries = true)
     public void importData(MultipartFile file) {
         this.dictService.importData(file);
     }

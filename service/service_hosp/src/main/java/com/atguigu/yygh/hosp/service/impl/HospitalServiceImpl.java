@@ -8,6 +8,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -30,9 +31,17 @@ public class HospitalServiceImpl implements HospitalService {
             if (target != null) {
                 // 修改
                 hospital.setId(target.getId());
+                hospital.setCreateTime(target.getCreateTime());
+                hospital.setUpdateTime(new Date());
+                hospital.setStatus(target.getStatus());
+                hospital.setIsDeleted(0);
                 hospitalRepository.save(hospital);
             } else {
                 // 添加
+                hospital.setCreateTime(new Date());
+                hospital.setUpdateTime(new Date());
+                hospital.setIsDeleted(0);
+                hospital.setStatus(0);
                 hospitalRepository.save(hospital);
             }
         }

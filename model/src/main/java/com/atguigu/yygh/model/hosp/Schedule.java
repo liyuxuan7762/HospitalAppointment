@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -24,9 +25,19 @@ import java.util.Date;
 @Data
 @ApiModel(description = "Schedule")
 @Document("Schedule")
+@NoArgsConstructor
 public class Schedule extends BaseMongoEntity {
 	
 	private static final long serialVersionUID = 1L;
+
+	public Schedule(String hoscode, String hosScheduleId) {
+		this.hoscode = hoscode;
+		this.hosScheduleId = hosScheduleId;
+	}
+
+	public Schedule(String hoscode) {
+		this.hoscode = hoscode;
+	}
 
 	@ApiModelProperty(value = "医院编号")
 	@Indexed //普通索引

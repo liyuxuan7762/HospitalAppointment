@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -22,9 +23,19 @@ import java.util.List;
 @Data
 @ApiModel(description = "Department")
 @Document("Department")
+@NoArgsConstructor
 public class Department extends BaseMongoEntity {
 	
 	private static final long serialVersionUID = 1L;
+
+	public Department(String hoscode) {
+		this.hoscode = hoscode;
+	}
+
+	public Department(String hoscode, String depcode) {
+		this.hoscode = hoscode;
+		this.depcode = depcode;
+	}
 
 	@ApiModelProperty(value = "医院编号")
 	@Indexed //普通索引

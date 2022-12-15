@@ -94,6 +94,7 @@ public class ApiServiceImpl implements ApiService {
         paramMap.put("route", jsonObject.getString("route"));
         //图片
         paramMap.put("logoData", jsonObject.getString("logoData"));
+        paramMap.put("status", 1);
 
         JSONObject bookingRule = jsonObject.getJSONObject("bookingRule");
         paramMap.put("bookingRule", bookingRule.toJSONString());

@@ -78,6 +78,53 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
         }
     }
 
+    @Override
+    public String getName(String dictCode, String value) {
+        QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("dict_code", dictCode);
+        Dict one = super.getOne(queryWrapper);
+        if (one == null) {
+            return null;
+        }
+        Dict dict = super.getOne(new QueryWrapper<Dict>()
+                .eq("parent_id", one.getId())
+                .eq("value", value)
+
+        );
+        return dict.getName();
+    }
+
+    @Override
+    public String getName(String value) {
+        QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("value", value);
+        Dict one = this.getOne(queryWrapper);
+        if (one != null) {
+            return one.getName();
+        }
+        return null;
+    }
+
+    @Override
+    public List<Dict> getProvidenceList() {
+        QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("dict_code", "Province");
+        Dict one = super.getOne(queryWrapper);
+        if (one == null) {
+            return null;
+        }
+        return super.list(new QueryWrapper<Dict>()
+                .eq("parent_id", one.getId())
+        );
+    }
+
+    @Override
+    public List<Dict> getCityList(Integer code) {
+        QueryWrapper<Dict> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("parent_id", code);
+        return super.list(queryWrapper);
+    }
+
     private boolean hasChild(Long id) {
         QueryWrapper<Dict> queryWrapper = new QueryWrapper();
         queryWrapper.eq("parent_id", id);
